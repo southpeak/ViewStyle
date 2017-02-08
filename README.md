@@ -1,14 +1,12 @@
 # ViewStyle
 
-ViewStyle提供了一种类似于CSS的方法，来设置iOS中视图的外观样式。
+`ViewStyle` provides a CSS-like way to set the style of a view in iOS.
 
-# 出发点
+The general structure of the Web front-end is that HTML is used to organize the basic structure of the view, and CSS is used to set the display style of HTML. In iOS, if you draw the UI with pure code but not Interface Builder, you need to set the view style manually. Just like HTML and CSS, the aim of `ViewStyle` is to separate the view structure and style code.
 
-Web前端的一般结构是HTML用于组织视图基本结构，而CSS用于设置视图标签的显示样式。在iOS中，如果**用纯代码来手撸界面**的话，也需要我们自己去设置视图元素的各种显示样式。鉴于HTML与CSS的方式的基本思想，ViewStyle提供了一种类似的方法，希望将视图的结构与样式设置分离。
+# How to use
 
-# 基本用法
-
-我们以UITableView为例，一般我们会按以下方式来设置一个UITableView：
+Generally, we will set up a `UITableView` as follow:
 
 ```swift
 tableView = UITableView(frame: self.view.bounds)
@@ -26,7 +24,7 @@ tableView!.cellLayoutMarginsFollowReadableWidth = true
 self.view.addSubview(tableView!)
 ```
 
-这种方式设置一个视图稍微有点繁杂，特别是视图代码多的时候。这种情况下可以考虑将样式设置的代码分离出来。ViewStyle为UIView提供了一个`mi_styles`计算属性，用于设置一样基本样式，使用方法如下：
+It is a little bit complicated, especially when there are a lot the views to set. In this case, we might consider to separate the code for the style settings. `ViewStyle` provides a `mi_styles` property for the UIView to set some basic style, just like the following way:
 
 ```swift
 class ViewController: UIViewController {
@@ -66,36 +64,39 @@ extension ViewController {
 }
 ```
 
-style的定义有两种方式：一种是定义成类的计算属性；一种定义成全局常量，方便复用。可以根据实际情况处理。
+There are two ways to define a style: 
 
-> 注：如果对同一个视图设置多个`mi_styles`，且style中有相同的属性，则后面的设置会覆盖前面的设置。
+* Computing properties of the class
+* Global constants
 
-# KVC及非KVC属性的处理
+It is according to the actual situations.
 
-ViewStyle的实现没有什么特别之处，就是通过KVC来批量设置属性。
+> Note: If you set multiple `mi_styles` for the same view, and the style has the same property, then the settings will override the previous settings.
 
-需要注意的是有些属性并不支持KVC，对于这类属性需要特殊处理。可以在`mi_specialProperties`中指定这些特殊属性，然后在`mi_setValue(_:forKey:)`方法中来逐个设置这些属性的值。
+# KVC and Non-KVC
 
-> 在UIView的子类中重写`mi_setValue(_:forKey:)`方法，需要调用父类的对应方法，以确保继承链中所有的非KVC属性得以正确的设置。
+`ViewStyle` set the properties in bulk through KVC. However, some properties is non-KVC and these properties need special treatment. You can point out these properties in `mi_specialProperties` property of UIView or its subclasses, then set the value of these properties one by one in the `mi_setValue(_:forKey:)` method.
 
-# DEBUG模式下的检测
+> Note: When overriding the `mi_setValue(_:forKey:)` method in a subclass of UIView, call the `mi_setValue(_:forKey:)` method of super class to ensure that all non-KVC properties in the inheritance chain are properly set.
 
-在**DEBUG**模式下，做了两步的检测：
+# Detection in the DEBUG mode
 
-1. 检测所设置的属性是否是类所拥有的属性。这个检测不包含非KVC属性及keyPath类型的属性，这两者需要自行保证正确性。后续版本会添加相应检测；
-2. 检测所设置属性的值的类型是否正确。
+In debug mode, there are two detections:
 
-在第2步检测中，做了一些特殊处理：
+1. Check the class has all of the properties. However, it is not including the non-KVC properties or key path properties, such as `layer.borderColor` of UIView. You must ensure the correctness of these properties.
+2. Check the type of the value is correct.
 
-1. 有些属性的实际类型与开发文档中的属性并不一致，例如有些颜色属性在文档中给的类型是`UIColor`，但实际上是`UICachedDeviceRGBColor`，对于这类属性，我们做了一个映射，将实际类型映射成文档中的类型，以便判断。这个判断稍显粗糙；
-2. 数值类型在用`setValue(forKey:)`时，不管给定的是什么数值类型，该方法都会帮我们自动转换，所以对于数值类型，不管给定的是什么数值(Int, Int32, Float)，在判断时将其类型统一转换为属性的类型，不加以区分；
-3. 有一些CG类型(如CGColor、CGPath)其原始类型为`__NSCFType`，我们会将`__NSCFType`转换为你设定的类型做判断
+We do some special work in the second step of the detections:
 
-在DEBUG模式下，如果这两步有一个检测失败，则会走断言处理。
+1. The actual type of some properties is not the same as the type in the document, such as some color properties' type in the document is `UIColor`, but in fact it is `UICachedDeviceRGBColor`. We made a mapping for these types for detection.
+2. There is no different between numeric type when set the value with `setValue(forKey:)`, so we treat the numeric types unanimously.
+3. The original type of some CG types, such as `CGColor` or `CGPath`, is `__NSCFType`. We do not check them carefully.
 
-# 扩展
+In debug mode, if one of these detections is failed, it will run assertion processing.
 
-如果想扩展一个视图类的属性，可以扩展`Property`结构体，添加需要的属性，如下所示：
+# Extension
+
+In `ViewStyle`, if you want to add a property of a view class, you can extend the `Property` struct and add the property as follows:
 
 ```swift
 // UITextField+Style
@@ -109,7 +110,7 @@ extension Property {
 }
 ```
 
-如果有非KVC的属性，则需要特殊处理，即UIView的重写`mi_specialProperties`属性和`mi_setValue(_:forKey:)`方法，如下代码所示：
+You have to do some special work for non-KVC properties. Override `mi_specialProperties` property and `mi_setValue(_:forKey:)` method of `UIView`, just like follows:
 
 ```swift
 // MARK: - Special Attributes
@@ -138,34 +139,29 @@ extension UITextField {
 }
 ```
 
-理论上来说，扩展不仅仅局限于视图的显示属性，可以使用这种方式添加你需要的任何属性。
+In theory, you can add any property you need, but not just display properties.
 
-# 问题
+# Problems
 
-由于这是个写着玩的东西，所以只是设置一些简单的样式属性，所以ViewStyle目前存在一些明显的问题：
+There are some obvious problems in `ViewStyle`:
 
-1. 无法设置视图的布局(太复杂)，这个需要自行使用AutoLayout；
-2. `mi_styles`的类型是`[Property: Any]`，即value的类型是Any，所以无法在编译时做类型检测，只是在DEBUG模式下做了个粗糙的类型判断。所以类型的正确性需要自行判断；
-3. 对于非KVC的属性，需要自行设置判断方式，即重写`mi_specialProperties`属性和`mi_setValue(_:forKey:)`方法；
-4. 性能问题待查
+1. It is not used for layout;
+2. The type of `mi_styles` is `[Property: Any]`, and the type of `value` is `Any`, so compile-time detection for type is impossible. You must ensure the correct for all value types.
+3. You need check the non-KVC properties with `mi_specialProperties` property and `mi_setValue(_:forKey:)` method.
 
-# 安装
+# Install
 
 ## CocoaPods
 
-1. 在 Podfile 中添加 `pod 'ViewStyle'`；
-2. 执行 `pod install` 或 `pod update`；
-3. 在需要使用的文件中导入`ViewStyle(import ViewStyle)`。
+1. Add `pod 'ViewStyle'` to your Podfile;
+2. Run `pod install` or `pod update`;
+3. `import ViewStyle)`
 
-## Carthage
+# Requirements
 
-待添加
-
-# 系统要求
-
-该项目最低支持iOS 8.0。后续考虑加入其它系统的支持。
+This library requires iOS 8.0+.
 
 # LICENSE
 
-ViewStyle使用MIT许可证，详情见 LICENSE 文件。
+ViewStyle is provided under the MIT license. See LICENSE file for details.
 
