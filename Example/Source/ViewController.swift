@@ -73,9 +73,9 @@ extension ViewController: UITableViewDataSource {
 // MARK: - Table View Style
 
 extension ViewController {
-    var tableViewStyle: [Property: Any] {
+    var tableViewStyle: [MIProperty: Any] {
         return [
-            .rowHeight: 60.0,
+            .rowHeight: 60,
             .separatorStyle: UITableViewCellSeparatorStyle.singleLine,
             .separatorColor: UIColor.lightGray,
             .backgroundView: UIView(),

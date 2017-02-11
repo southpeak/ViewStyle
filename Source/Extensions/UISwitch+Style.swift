@@ -9,10 +9,18 @@
 import Foundation
 import UIKit
 
-extension Property {
+extension UISwitch {
     
-    public static let onTintColor           = Property(#keyPath(UISwitch.onTintColor), MIType.color>?)
-    public static let thumbTintColor        = Property(#keyPath(UISwitch.thumbTintColor), MIType.color>?)
-    public static let onImage               = Property(#keyPath(UISwitch.onImage), MIType.image>?)
-    public static let offImage              = Property(#keyPath(UISwitch.offImage), MIType.image>?)
+    open override func mi_setValue(_ value: Any, forKey key: String) {
+        let style = MIProperty(rawValue: key)!
+        
+        switch style {
+        case .onTintColor:                  onTintColor                     <<< (value as? UIColor)
+        case .tintColor:                    tintColor                       <<< (value as! UIColor)
+        case .thumbTintColor:               thumbTintColor                  <<< (value as? UIColor)
+        case .onImage:                      onImage                         <<< (value as? UIImage)
+        case .offImage:                     offImage                        <<< (value as? UIImage)
+        default: super.mi_setValue(value, forKey: key)
+        }
+    }
 }

@@ -9,9 +9,21 @@
 import Foundation
 import UIKit
 
-extension Property {
+extension UITextView {
     
-    public static let isEditable                    = Property(#keyPath(UITextView.isEditable), .bool)
-    public static let allowsEditingTextAttributes   = Property(#keyPath(UITextView.allowsEditingTextAttributes), .bool)
-    public static let isSelectable                  = Property(#keyPath(UITextView.isSelectable), .bool)
+    open override func mi_setValue(_ value: Any, forKey key: String) {
+        
+        let style = MIProperty(rawValue: key)!
+        
+        switch style {
+        case .font:                         font                            <<< (value as? UIFont)
+        case .textColor:                    textColor                       <<< (value as? UIColor)
+        case .isEditable:                   isEditable                      <<< (value as! Bool)
+        case .allowsEditingTextAttributes:  allowsEditingTextAttributes     <<< (value as! Bool)
+        case .textAlignment:                textAlignment                   <<< (value as! NSTextAlignment)
+        case .textContainerInset:           textContainerInset              <<< (value as! UIEdgeInsets)
+        case .isSelectable:                 isSelectable                    <<< (value as! Bool)
+        default: super.mi_setValue(value, forKey: key)
+        }
+    }
 }

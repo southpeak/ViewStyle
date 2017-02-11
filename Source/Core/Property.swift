@@ -1,5 +1,5 @@
 //
-//  Property.swift
+//  MIProperty.swift
 //  ViewStyle
 //
 //  Created by Konka on 2017/1/23.
@@ -8,42 +8,128 @@
 
 import Foundation
 
-/// `Property` struct
-///
-/// This struct is used to describe a property of the UIView or its subclass.
-/// We need two informations of the property:
-/// 1. name: which is used when we set the value of the property with KVC or special method;
-/// 2. type: which is used to check the type is correct in debug mode.
-public struct Property {
+/// Style Property key
+public enum MIProperty: String {
     
-    /// Property's name
-    var name: String
+    // MARK: - UIView
+    case backgroundColor
+    case isHidden
+    case alpha
+    case isOpaque
+    case tintColor
+    case tintAdjustmentMode
+    case clipsToBounds
+    case clearsContextBeforeDrawing
     
-    /// Property's type, you must make sure the type is correct if you want to define
-    /// an `Property` for a property, or it will crash when debugging.
-    var type: MIType
+    // MARK: - CALayer
+    case layerContentsGravity
+    case layerOpacity
+    case layerIsHidden
+    case layerMasksToBounds
+    case layerMask
+    case layerIsDoubleSided
+    case layerCornerRadius
+    case layerBorderWidth
+    case layerBorderColor
+    case layerBackgroundColor
+    case layerShadowOpacity
+    case layerShadowRadius
+    case layerShadowOffset
+    case layerShadowColor
+    case layerShadowPath
+    case layerAllowsEdgeAntialiasing
+    case layerAllowsGroupOpacity
     
-    /// Initializer
-    ///
-    /// - Parameters:
-    ///   - name: property's name
-    ///   - type: property's type
-    public init(_ name: String, _ type: MIType) {
-        self.name = name
-        self.type = type
-    }
-}
-
-// MARK: Hashable
-extension Property: Hashable {
-    public var hashValue: Int {
-        return name.hashValue
-    }
-}
-
-// MARK: Equatable
-extension Property: Equatable {
-    public static func ==(lhs: Property, rhs: Property) -> Bool {
-        return lhs.name == rhs.name && lhs.type == rhs.type
-    }
+    // MARK: - UITextView
+    case isEditable
+    case allowsEditingTextAttributes
+    case isSelectable
+    case textContainerInset
+    
+    // MARK: - UITextField
+    
+    case borderStyle
+    case background
+    case disabledBackground
+    case clearButtonMode
+    case rightViewMode
+    
+    // MARK: - UITableView
+    case rowHeight
+    case separatorStyle
+    case separatorColor
+    case separatorEffect
+    case backgroundView
+    case separatorInset
+    case cellLayoutMarginsFollowReadableWidth
+    
+    // MARK: - UISwitch
+    case onTintColor
+    case thumbTintColor
+    case onImage
+    case offImage
+    
+    // MARK: - UIScrollView
+    case contentSize
+    case contentInset
+    case isScrollEnabled
+    case isDirectionalLockEnabled
+    case scrollsToTop
+    case isPagingEnabled
+    case bounces
+    case alwaysBounceVertical
+    case alwaysBounceHorizontal
+    case indicatorStyle
+    case scrollIndicatorInsets
+    case showsHorizontalScrollIndicator
+    case showsVerticalScrollIndicator
+    
+    // MARK: - UILabel
+    case font
+    case textColor
+    case textAlignment
+    case lineBreakMode
+    case isEnabled
+    case adjustsFontSizeToFitWidth
+    case allowsDefaultTighteningForTruncation
+    case baselineAdjustment
+    case minimumScaleFactor
+    case numberOfLines
+    case highlightedTextColor
+    case isHighlighted
+    case shadowColor
+    case shadowOffset
+    
+    // MARK: - UIImageView
+    case image
+    case highlightedImage
+    case isUserInteractionEnabled
+    
+    // MARK: - UIButton
+    case adjustsImageWhenHighlighted
+    case adjustsImageWhenDisabled
+    case showsTouchWhenHighlighted
+    case contentEdgeInsets
+    case titleEdgeInsets
+    case imageEdgeInsets
+    
+    case titleColorNormal
+    case titleColorHightlighted
+    case titleColorDisabled
+    case titleColorSelected
+    
+    case titleShadowColorNormal
+    case titleShadowColorHighlighted
+    case titleShadowColorDisabled
+    case titleShadowColorSelected
+    
+    case backgroundImageNormal
+    case backgroundImageHighlighted
+    case backgroundImageDisabled
+    case backgroundImageSelected
+    
+    case imageNormal
+    case imageHighlighted
+    case imageDisabled
+    case imageSelected
 }
