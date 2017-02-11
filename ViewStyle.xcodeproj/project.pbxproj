@@ -10,7 +10,6 @@
 		E15AF0CB1E41B5480082C755 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15AF0CA1E41B5480082C755 /* Tests.swift */; };
 		E15AF0CD1E41B5480082C755 /* ViewStyle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E15AF0AA1E41B4A80082C755 /* ViewStyle.framework */; };
 		E15AF0D71E41B58D0082C755 /* ViewStyle.h in Headers */ = {isa = PBXBuildFile; fileRef = E15AF0D51E41B58D0082C755 /* ViewStyle.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E15AF1171E41BAFB0082C755 /* MIType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15AF1081E41BAFB0082C755 /* MIType.swift */; };
 		E15AF1181E41BAFB0082C755 /* Property.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15AF1091E41BAFB0082C755 /* Property.swift */; };
 		E15AF1191E41BAFB0082C755 /* UIViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15AF10A1E41BAFB0082C755 /* UIViewStyle.swift */; };
 		E15AF11A1E41BAFB0082C755 /* UIButton+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15AF10C1E41BAFB0082C755 /* UIButton+Style.swift */; };
@@ -21,8 +20,6 @@
 		E15AF1211E41BAFB0082C755 /* UITableView+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15AF1131E41BAFB0082C755 /* UITableView+Style.swift */; };
 		E15AF1221E41BAFB0082C755 /* UITextField+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15AF1141E41BAFB0082C755 /* UITextField+Style.swift */; };
 		E15AF1231E41BAFB0082C755 /* UITextView+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15AF1151E41BAFB0082C755 /* UITextView+Style.swift */; };
-		E15AF1261E41C6DD0082C755 /* TypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15AF1251E41C6DD0082C755 /* TypeTests.swift */; };
-		E15AF13D1E4302320082C755 /* UIView+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15AF13C1E4302320082C755 /* UIView+Style.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,7 +39,6 @@
 		E15AF0CC1E41B5480082C755 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E15AF0D41E41B58D0082C755 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E15AF0D51E41B58D0082C755 /* ViewStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewStyle.h; sourceTree = "<group>"; };
-		E15AF1081E41BAFB0082C755 /* MIType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MIType.swift; sourceTree = "<group>"; };
 		E15AF1091E41BAFB0082C755 /* Property.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Property.swift; sourceTree = "<group>"; };
 		E15AF10A1E41BAFB0082C755 /* UIViewStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewStyle.swift; sourceTree = "<group>"; };
 		E15AF10C1E41BAFB0082C755 /* UIButton+Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+Style.swift"; sourceTree = "<group>"; };
@@ -53,8 +49,6 @@
 		E15AF1131E41BAFB0082C755 /* UITableView+Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+Style.swift"; sourceTree = "<group>"; };
 		E15AF1141E41BAFB0082C755 /* UITextField+Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITextField+Style.swift"; sourceTree = "<group>"; };
 		E15AF1151E41BAFB0082C755 /* UITextView+Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITextView+Style.swift"; sourceTree = "<group>"; };
-		E15AF1251E41C6DD0082C755 /* TypeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypeTests.swift; sourceTree = "<group>"; };
-		E15AF13C1E4302320082C755 /* UIView+Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Style.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,7 +93,6 @@
 			children = (
 				E15AF0CA1E41B5480082C755 /* Tests.swift */,
 				E15AF0CC1E41B5480082C755 /* Info.plist */,
-				E15AF1251E41C6DD0082C755 /* TypeTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -118,8 +111,6 @@
 		E15AF1071E41BAFB0082C755 /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				E15AF13C1E4302320082C755 /* UIView+Style.swift */,
-				E15AF1081E41BAFB0082C755 /* MIType.swift */,
 				E15AF1091E41BAFB0082C755 /* Property.swift */,
 				E15AF10A1E41BAFB0082C755 /* UIViewStyle.swift */,
 			);
@@ -251,14 +242,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E15AF13D1E4302320082C755 /* UIView+Style.swift in Sources */,
 				E15AF11E1E41BAFB0082C755 /* UILabel+Style.swift in Sources */,
 				E15AF1201E41BAFB0082C755 /* UISwitch+Style.swift in Sources */,
 				E15AF1191E41BAFB0082C755 /* UIViewStyle.swift in Sources */,
 				E15AF11F1E41BAFB0082C755 /* UIScrollView+Style.swift in Sources */,
 				E15AF11A1E41BAFB0082C755 /* UIButton+Style.swift in Sources */,
 				E15AF1181E41BAFB0082C755 /* Property.swift in Sources */,
-				E15AF1171E41BAFB0082C755 /* MIType.swift in Sources */,
 				E15AF1221E41BAFB0082C755 /* UITextField+Style.swift in Sources */,
 				E15AF1211E41BAFB0082C755 /* UITableView+Style.swift in Sources */,
 				E15AF11D1E41BAFB0082C755 /* UIImageView+Style.swift in Sources */,
@@ -271,7 +260,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				E15AF0CB1E41B5480082C755 /* Tests.swift in Sources */,
-				E15AF1261E41C6DD0082C755 /* TypeTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,12 +8,18 @@
 
 import Foundation
 
-extension Property {
-    public static let image       = Property(#keyPath(UIImageView.image), MIType.image>?)
-    public static let highlightedImage  = Property(#keyPath(UIImageView.highlightedImage), MIType.image>?)
+extension UIImageView {
     
-    public static let isUserInteractionEnabled = Property(#keyPath(UIImageView.isUserInteractionEnabled), .bool)
-    
-//    public static let isHighlighted     = Property(#keyPath(UIImageView.isHighlighted), .bool)
-//    public static let tintColor         = Property(#keyPath(UIImageView.tintColor), MIType.color>!)
+    open override func mi_setValue(_ value: Any, forKey key: String) {
+        let style = MIProperty(rawValue: key)!
+        
+        switch style {
+        case .image:                        image                           <<< (value as? UIImage)
+        case .highlightedImage:             highlightedImage                <<< (value as? UIImage)
+        case .isUserInteractionEnabled:     isUserInteractionEnabled        <<< (value as! Bool)
+        case .isHighlighted:                isHighlighted                   <<< (value as! Bool)
+        case .tintColor:                    tintColor                       <<< (value as! UIColor)
+        default: super.mi_setValue(value, forKey: key)
+        }
+    }
 }

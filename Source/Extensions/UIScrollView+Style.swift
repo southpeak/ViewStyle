@@ -9,45 +9,26 @@
 import Foundation
 import UIKit
 
-extension Property {
-    
-    public static let contentSize               = Property(#keyPath(UIScrollView.contentSize), .cgSize)
-    public static let contentInset              = Property(#keyPath(UIScrollView.contentInset), .edgeInsets)
-    
-    public static let isScrollEnabled           = Property(#keyPath(UIScrollView.isScrollEnabled), .bool)
-    public static let isDirectionalLockEnabled  = Property(#keyPath(UIScrollView.isDirectionalLockEnabled), .bool)
-    public static let scrollsToTop              = Property(#keyPath(UIScrollView.scrollsToTop), .bool)
-    public static let isPagingEnabled           = Property(#keyPath(UIScrollView.isPagingEnabled), .bool)
-    public static let bounces                   = Property(#keyPath(UIScrollView.bounces), .bool)
-    public static let alwaysBounceVertical      = Property(#keyPath(UIScrollView.alwaysBounceVertical), .bool)
-    public static let alwaysBounceHorizontal    = Property(#keyPath(UIScrollView.alwaysBounceHorizontal), .bool)
-    
-    public static let indicatorStyle            = Property(#keyPath(UIScrollView.indicatorStyle), .scrollViewIndicatorStyle)
-    public static let scrollIndicatorInsets     = Property(#keyPath(UIScrollView.scrollIndicatorInsets), .edgeInsets)
-    
-    public static let showsHorizontalScrollIndicator    = Property(#keyPath(UIScrollView.showsHorizontalScrollIndicator), .bool)
-    public static let showsVerticalScrollIndicator      = Property(#keyPath(UIScrollView.showsVerticalScrollIndicator), .bool)
-}
-
 extension UIScrollView {
     
-    open override var mi_specialProperties: [String] {
-        
-        var properties = super.mi_specialProperties
-        
-        properties.append(contentsOf: [
-            #keyPath(UIScrollView.indicatorStyle)
-        ])
-        
-        return properties
-    }
-    
     open override func mi_setValue(_ value: Any, forKey key: String) {
-        switch key {
-        case #keyPath(UIScrollView.indicatorStyle):
-            self.indicatorStyle = value as! UIScrollViewIndicatorStyle
-        default:
-            super.mi_setValue(value, forKey: key)
+        let style = MIProperty(rawValue: key)!
+        
+        switch style {
+        case .contentSize:                  contentSize                     <<< (value as! CGSize)
+        case .contentInset:                 contentInset                    <<< (value as! UIEdgeInsets)
+        case .isScrollEnabled:              isScrollEnabled                 <<< (value as! Bool)
+        case .isDirectionalLockEnabled:     isDirectionalLockEnabled        <<< (value as! Bool)
+        case .scrollsToTop:                 scrollsToTop                    <<< (value as! Bool)
+        case .isPagingEnabled:              isPagingEnabled                 <<< (value as! Bool)
+        case .bounces:                      bounces                         <<< (value as! Bool)
+        case .alwaysBounceVertical:         alwaysBounceVertical            <<< (value as! Bool)
+        case .alwaysBounceHorizontal:       alwaysBounceHorizontal          <<< (value as! Bool)
+        case .indicatorStyle:               indicatorStyle                  <<< (value as! UIScrollViewIndicatorStyle)
+        case .scrollIndicatorInsets:        scrollIndicatorInsets           <<< (value as! UIEdgeInsets)
+        case .showsVerticalScrollIndicator: showsVerticalScrollIndicator    <<< (value as! Bool)
+        case .showsHorizontalScrollIndicator: showsHorizontalScrollIndicator <<< (value as! Bool)
+        default: super.mi_setValue(value, forKey: key)
         }
     }
 }

@@ -38,7 +38,7 @@ class ViewViewController: UIViewController {
 
 extension ViewViewController {
     
-    var normalStyle: [Property: Any] {
+    var normalStyle: [MIProperty: Any] {
         return [
             .backgroundColor: UIColor.blue,
             .alpha: 0.5,
@@ -50,22 +50,22 @@ extension ViewViewController {
         ]
     }
     
-    var layerStyle: [Property: Any] {
+    var layerStyle: [MIProperty: Any] {
         return [
             .clipsToBounds: false,
-            Property.layer.borderWidth: 1.0,
-            Property.layer.borderColor: UIColor.red.cgColor,
-            Property.layer.shadowRadius: 4.0,
-            Property.layer.shadowColor: UIColor.green.cgColor,
-            Property.layer.shadowOffset: CGSize(width: 10, height: 10),
-            Property.layer.shadowOpacity: 0.8
+            .layerBorderWidth: 1.0,
+            .layerBorderColor: UIColor.red.cgColor,
+            .layerShadowRadius: 4.0,
+            .layerShadowColor: UIColor.green.cgColor,
+            .layerShadowOffset: CGSize(width: 10, height: 10),
+            .layerShadowOpacity: 0.8
         ]
     }
     
-    var imageStyle: [Property: Any] {
+    var imageStyle: [MIProperty: Any] {
         return [
-            Property.layer.masksToBounds: true,
-            Property.layer.cornerRadius: 8.0,
+            .layerMasksToBounds: true,
+            .layerCornerRadius: 8.0,
             .image: UIImage(named: "view")!
         ]
     }

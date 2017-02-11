@@ -36,31 +36,31 @@ class ControlViewController: UIViewController {
 }
 
 extension ControlViewController {
-    var labelStyle: [Property: Any] {
+    var labelStyle: [MIProperty: Any] {
         return [
             .font: UIFont(name: "Helvetica Neue", size: 30)!,
             .textColor: UIColor.blue,
             .textAlignment: NSTextAlignment.center,
             .shadowColor: UIColor.red,
             .shadowOffset: CGSize(width: 3.0, height: 3.0),
-            Property.layer.borderWidth: 1.0,
-            Property.layer.borderColor: UIColor.blue
+            .layerBorderWidth: 1.0,
+            .layerBorderColor: UIColor.blue
         ]
     }
     
-    var buttonStyle: [Property: Any] {
+    var buttonStyle: [MIProperty: Any] {
         return [
             .backgroundColor: UIColor.blue,
-            Property.titleColor.normal: UIColor.white,
-            Property.titleColor.hightlighted: UIColor.gray,
-            Property.titleShadowColor.normal: UIColor.yellow,
-            Property.icon.normal: UIImage(named: "add")!,
+            .titleColorNormal: UIColor.white,
+            .titleColorHightlighted: UIColor.gray,
+            .titleShadowColorNormal: UIColor.yellow,
+            .imageNormal: UIImage(named: "add")!,
             .titleEdgeInsets: UIEdgeInsets(top: 0.0, left: 50, bottom: 0.0, right: 5.0),
             .imageEdgeInsets: UIEdgeInsets(top: 0.0, left: 10.0, bottom: 0.0, right: 100.0)
         ]
     }
     
-    var switchStyle: [Property: Any] {
+    var switchStyle: [MIProperty: Any] {
         return [
             .onTintColor: UIColor.red,
             .tintColor: UIColor.blue,
