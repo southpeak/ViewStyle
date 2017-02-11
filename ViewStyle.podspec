@@ -2,7 +2,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "ViewStyle"
-  s.version      = "0.0.1"
+  s.version      = "1.0.0"
   s.summary      = "Provides a way to set UIView's visual appearance properties like CSS"
   s.homepage     = "https://github.com/southpeak/ViewStyle"
   s.license      = "MIT"
